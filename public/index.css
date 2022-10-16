@@ -47,6 +47,7 @@ footer p {
 .note h1 {
   font-size: 1.1em;
   margin-bottom: 6px;
+  font-style: italic;
 }
 .note p {
   font-size: 1.1em;
