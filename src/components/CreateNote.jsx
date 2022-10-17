@@ -5,16 +5,23 @@ function CreateNote(props) {
 
   function updateCreateNote(event) {
     const { name, value } = event.target;
-    name === "title"
-      ? updateInputText((prevValue) => {
-          return { title: value, content: prevValue.content };
-        })
-      : updateInputText((prevValue) => {
-          return { title: prevValue.title, content: value };
-        });
-    if (name === "createNoteForm"){
-        updateInputText({ title: "", content: "" })
-    }
+
+    //USING TERNARY CONDITIONALS, not very clean...
+
+    // name === "title"
+    //   ? updateInputText((prevValue) => {
+    //       return { title: value, content: prevValue.content };
+    //     })
+    //   : updateInputText((prevValue) => {
+    //       return { title: prevValue.title, content: value };
+    //     });
+
+
+    //USING Spread operator with previous state values, to change previous values based on key and name from event.target:
+
+    updateInputText(prevValue =>{
+        return {...prevValue, [name]:value};
+    })
   }
 
   return (
@@ -23,7 +30,7 @@ function CreateNote(props) {
       onSubmit={(event) => {
         props.onAdd(inputText);
         event.preventDefault(); //prevents automatic refresh from form submit
-        updateCreateNote(event)
+        updateInputText({ title: "", content: "" })
       }}
     >
       <div>

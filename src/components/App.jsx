@@ -3,12 +3,11 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateNote from "./CreateNote";
-// import { notes } from "../db/db_notes";
 
 function App() {
   const [notes, updateNotes] = useState([]);
 
-  function createNotes(newNote) {
+  function createNote(newNote) {
     updateNotes((prevNotes) => [...prevNotes, newNote]);
   }
 
@@ -19,7 +18,7 @@ function App() {
   return (
     <div>
       <Header />
-      <CreateNote onAdd={createNotes} />
+      <CreateNote onAdd={createNote} />
       {notes.map((note, index) => {
         return (
           <Note
