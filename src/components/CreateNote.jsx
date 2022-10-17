@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import Fab from "@mui/material/Fab";
-import Zoom from '@mui/material/Zoom';
+import Zoom from "@mui/material/Zoom";
 
 function CreateNote(props) {
   const [inputText, updateInputText] = useState({ title: "", content: "" });
+  const [params, updateParams] = useState({
+    hiddenTitleField: true,
+    rows: "1",
+    zoom: false,
+  });
 
   function updateCreateNote(event) {
     const { name, value } = event.target;
@@ -34,6 +39,7 @@ function CreateNote(props) {
         props.onAdd(inputText);
         event.preventDefault(); //prevents automatic refresh from form submit
         updateInputText({ title: "", content: "" });
+        updateParams({ hiddenTitleField: true, rows: "1", zoom: false });
       }}
     >
       <div>
@@ -42,15 +48,24 @@ function CreateNote(props) {
           placeholder="Title"
           value={inputText.title}
           name="title"
+          hidden={params.hiddenTitleField}
         />
         <textarea
           onChange={updateCreateNote}
           placeholder="Compose your note..."
           value={inputText.content}
           name="content"
+          rows={params.rows}
+          onClick={() => {
+            updateParams({
+              hiddenTitleField: false,
+              rows: "5",
+              zoom: true,
+            });
+          }}
         />
       </div>
-      <Zoom in ={true}>
+      <Zoom in={params.zoom}>
         <Fab type="submit">
           <PostAddIcon />
         </Fab>

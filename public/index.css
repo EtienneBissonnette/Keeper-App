@@ -9,6 +9,7 @@ html {
 body {
   background: #eee;
   padding: 0 16px;
+  background-image: url("https://www.transparenttextures.com/patterns/brick-wall.png");
 }
 
 header {
@@ -102,4 +103,8 @@ form.create-note button {
   height: 36px;
   cursor: pointer;
   outline: none;
+}
+
+.note button:hover {
+  color: lightgray;
 }
