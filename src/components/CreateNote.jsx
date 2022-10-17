@@ -12,10 +12,20 @@ function CreateNote(props) {
       : updateInputText((prevValue) => {
           return { title: prevValue.title, content: value };
         });
+    if (name === "createNoteForm"){
+        updateInputText({ title: "", content: "" })
+    }
   }
-// TODO form html element is not working with this format but css is styles based on this element need either change css and use a div, or send info with form
+
   return (
-    <form> 
+    <form
+      name="createNoteForm"
+      onSubmit={(event) => {
+        props.onAdd(inputText);
+        event.preventDefault(); //prevents automatic refresh from form submit
+        updateCreateNote(event)
+      }}
+    >
       <div>
         <input
           onChange={updateCreateNote}
@@ -27,16 +37,11 @@ function CreateNote(props) {
           onChange={updateCreateNote}
           placeholder="Compose your note..."
           value={inputText.content}
+          name="content"
         />
       </div>
       <div>
-        <button
-          onClick={() => {
-            props.onAdd(inputText);
-          }}
-        >
-          Add
-        </button>
+        <button type="submit">Add</button>
       </div>
     </form>
   );

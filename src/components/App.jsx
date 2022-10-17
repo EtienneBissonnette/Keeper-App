@@ -9,16 +9,26 @@ function App() {
   const [notes, updateNotes] = useState([]);
 
   function createNotes(newNote) {
-    updateNotes(prevNotes => [...prevNotes, newNote])
+    updateNotes((prevNotes) => [...prevNotes, newNote]);
+  }
+
+  function deleteNote(id) {
+    updateNotes(notes.filter((note,index) => index !== id));
   }
 
   return (
     <div>
       <Header />
-      <CreateNote onAdd = {createNotes} />
-      {notes.map((note,index) => {
+      <CreateNote onAdd={createNotes} />
+      {notes.map((note, index) => {
         return (
-          <Note key={index} title={note.title} content={note.content} />
+          <Note
+            key={index}
+            id={index}
+            title={note.title}
+            content={note.content}
+            onDelete={deleteNote}
+          />
         );
       })}
       <Footer />
