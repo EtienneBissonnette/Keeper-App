@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import Fab from "@mui/material/Fab";
+import Zoom from '@mui/material/Zoom';
 
 function CreateNote(props) {
   const [inputText, updateInputText] = useState({ title: "", content: "" });
@@ -16,21 +19,21 @@ function CreateNote(props) {
     //       return { title: prevValue.title, content: value };
     //     });
 
-
     //USING Spread operator with previous state values, to change previous values based on key and name from event.target:
 
-    updateInputText(prevValue =>{
-        return {...prevValue, [name]:value};
-    })
+    updateInputText((prevValue) => {
+      return { ...prevValue, [name]: value };
+    });
   }
 
   return (
     <form
+      class="create-note"
       name="createNoteForm"
       onSubmit={(event) => {
         props.onAdd(inputText);
         event.preventDefault(); //prevents automatic refresh from form submit
-        updateInputText({ title: "", content: "" })
+        updateInputText({ title: "", content: "" });
       }}
     >
       <div>
@@ -47,9 +50,11 @@ function CreateNote(props) {
           name="content"
         />
       </div>
-      <div>
-        <button type="submit">Add</button>
-      </div>
+      <Zoom in ={true}>
+        <Fab type="submit">
+          <PostAddIcon />
+        </Fab>
+      </Zoom>
     </form>
   );
 }
